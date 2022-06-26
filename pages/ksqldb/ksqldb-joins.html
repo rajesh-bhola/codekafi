@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Codekafi | KsqlDB Joins</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+      <div class="container-fluid">
+        <img src="../logo2.png" /> &nbsp;&nbsp;
+        <a class="navbar-brand" href="/index.html">CodeKafi</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mynavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="mynavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/apache-kafka.html"
+                >Apache Kafka</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/kafka-streams.html">Kafka Streams</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ksql-db.html">Ksql DB</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/kafka-connect.html">Kafka Connect</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br /><br />
+    <br />
+
+    <div class="container-fluid banner">
+      <h1
+        class="banner-text"
+        style="
+          font-size: 50px;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          color: white;
+        "
+      >
+        KsqlDB Joining Collections
+      </h1>
+    </div>
+
+    <div class="container-fluid profile">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+          <div class="float-start">
+            <img
+              src="/pages/images/profile-pic1.png"
+              width="100"
+              height="90"
+              alt=""
+            />
+            <p
+              class=""
+              style="font-family: Verdana, Geneva, Tahoma, sans-serif"
+            >
+            <b>Rajesh Bhola</b>
+              <br />
+              <i>Jr. Software Engineer at <b>Girmiti</b></i><br>
+              <span class="text-muted title1">Exp: 2.5+ years</span>
+            </p>
+          </div>
+          <div class="float-end">
+            <p class="text-muted"><b>Published on : </b><i>18-August-2021</i></p>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+
+    <div class="container-fluid content justify-content-center">
+      <div class="row text-margin">
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+          <h1 class="color">Joining collections</h1>
+          <br />
+          <img
+            src="/images/db-post-6.png"
+            class="img-fluid responsive"
+            alt=""
+            style="border-radius: 10px; height: 400px; width: 850px;"
+          /> <br> <br> <br>
+          <p class="text-size list-group-item-light text-line">
+             We can use KsqlDB to merge streams of events in real-time by using the 
+             join statement.  
+          </p> 
+          <p class="text-size list-group-item-light text-line"> 
+            The result of KsqlDB join is a new stream or table that's populated with
+            the column values that we specify in a SELECT statement.</p> <br>
+          <h3 class="color">Stream - Stream joins</h3><br>
+          <p class="text-size list-group-item-light text-line">
+            KsqlDB supports INNER, LEFT OUTER(LEFT JOIN), FULL OUTER(OUTER JOIN).  
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            To join two streams, we must specify a windowing scheme by using the WITHIN clause.
+          </p><br>
+          <h5><b>Example</b></h5>
+          <div class="code-box1">
+            <pre>
+                <code>
+                ksql > <span class="color">CREATE STREAM</span> stream1 (user <span class="color">VARCHAR</span>, id <span class="color">INT</span>)
+                       <span class="color">WITH</span> (<span class="color">KAFKA_TOPIC</span> = 'topic1', 
+                            <span class="color"> PARTITIONS</span> = 1,
+                            <span class="color"> VALUE_FORMAT</span> = 'JSON'
+                       );
+                </code>       
+            </pre>  
+          </div><br><br>
+          <div class="code-box1">
+            <pre>
+                <code>
+                ksql > <span class="color">CREATE STREAM</span> stream2 (user <span class="color">VARCHAR</span>)
+                       <span class="color">WITH</span> (<span class="color">KAFKA_TOPIC</span> = 'topic2', 
+                            <span class="color"> PARTITIONS</span> = 1,
+                            <span class="color"> VALUE_FORMAT</span> = 'JSON'
+                       );
+                </code>       
+            </pre>  
+          </div><br><br>
+          <div class="code-box1">
+            <pre>
+                <code>
+                ksql > <span class="color">CREATE STREAM</span> stream3 <span class="color">AS</span>
+                       <span class="color">SELECT * FROM </span> stream1 s1 
+                      <span class="color"> JOIN</span> stream2 s2
+                      <span class="color"> WITHIN 1 MINUTE ON</span>
+                       s1.user = s2.user 
+                       <span class="color">EMIT CHANGES</span>
+                       );
+                </code>       
+            </pre>  
+          </div><br><br>
+          <h3 class="color">Stream - Stream - Stream joins</h3><br>
+          <h5><b>Example</b></h5>
+          <div class="code-box1">
+            <pre>
+                <code>
+                ksql > <span class="color">CREATE STREAM</span> stream4 <span class="color">AS</span>
+                       <span class="color">SELECT</span> 
+                       s1.id <span class="color">AS</span> s1_id, 
+                       s2.id <span class="color">AS</span> s2_id, 
+                       s3.id <span class="color">AS</span> s3_id, 
+                      <span class="color"> FROM </span> stream1 s1
+                      <span class="color"> INNER JOIN</span> stream3 s3
+                       <span class="color">WITHIN 1 HOURS ON</span> s3.id = s1.id
+                      <span class="color"> INNER JOIN</span> stream2 s2
+                       <span class="color">WITHIN 2 HOURS ON</span> s2.id = s1.id;
+                </code>       
+            </pre>  
+          </div><br><br>
+          <h3 class="color">Stream - Table - Stream joins</h3><br>
+          <h5><b>Example</b></h5>
+          <div class="code-box1">
+            <pre>
+                <code>
+                ksql > <span class="color">CREATE STREAM</span> movies_ratings
+                       <span class="color">WITH</span> (<span class="color">KAFKA_TOPIC</span> = 'movies_ratings',
+                       <span class="color">VALUE_FORMAT</span> = 'JSON' ) <span class="color">AS</span> 
+                       <span class="color">SELECT</span> ratings.movie_id, title, year, rating 
+                      <span class="color"> FROM </span> ratings
+                      <span class="color"> LEFT JOIN</span> movies
+                       <span class="color">ON</span> ratings.movie_id = movies.id;
+                </code>       
+            </pre>  
+          </div><br><br>
+          <h3 class="color">Table - Table - Table joins</h3><br>
+          <h5><b>Example</b></h5>
+          <div class="code-box1">
+            <pre>
+                <code>
+                ksql > <span class="color">CREATE TABLE</span> movies_actor
+                       <span class="color">AS</span> 
+                       <span class="color">SELECT</span> m.id, m.title, m.year, a.actor_name
+                      <span class="color"> FROM </span> movies m
+                      <span class="color"> INNER JOIN</span> actor a
+                       <span class="color">ON</span> m.title = a.title;
+                </code>       
+            </pre>  
+          </div><br><br>
+         
+          <p class="alert alert-secondary text-size" style="text-align:center">
+            <b>Thanks for reading !!!❤️</b>
+          </p> <br><br>
+        </div>
+        <div class="col-md-3">
+          <h3><b>Related Posts</b></h3>
+          <br />
+          <ul class="list-unstyled">
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/ksqldb/ksqldb-and-its-components.html">
+                    1. What is KsqlDB and it's components</a>
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/ksqldb/ksqldb-architecture.html"
+                    >2. What is KsqlDB architecture</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/ksqldb/ksqldb-collections.html"
+                    >3. What are the collections in KsqlDB</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/ksqldb/stream-processing.html"
+                    >4. What is stream processing in KsqlDB</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/ksqldb/ksqldb-queries.html"
+                    >5. Queries in KsqlDB</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/ksqldb/ksqldb-joins.html">
+                    6. Joining collections in KsqlDB</a>
+                </h6>
+              </div>
+            </li>
+            <br />
+          </ul><br><br><br>
+
+          <h3><b>About Me</b></h3>
+          <div class="float-start bg-light aboutme">
+            <img
+              src="/pages/images/profile-pic1.png"
+              width="100"
+              height="90"
+              alt=""
+            />
+            <p
+              class="color"
+              style="font-family: Verdana, Geneva, Tahoma, sans-serif"
+            >
+              <b>Rajesh Bhola</b>
+              <br />
+              <p>
+                <i>I am a Junior Software Engineer at Girmiti, 
+                  and CodeKafi web services. I like writing about myself in the third person ✍️, 
+                  eating good breakfasts 🍔, and playing cricket 🏏.</i>
+              </p>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!--Footer start-->
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+      <section class="mb-4 text-center">
+        <!-- Facebook -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+
+        <!-- Twitter -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-twitter"></i
+        ></a>
+
+        <!-- Instagram -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-instagram"></i
+        ></a>
+
+        <!-- Linkedin -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <!-- Github -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 navbar-light">
+              <!-- Content -->
+              <h6 class="">
+                <img src="../logo2.png" />
+                <a class="navbar-brand" href="index.html">CodeKafi</a>
+              </h6>
+              <p>
+                This website is providing the knowledge regarding Apache Kafka concepts.
+                And also provides the knowledge about Kafka Streams and KsqlDB.
+               </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4 color">Reference</h6>
+              <p>
+                <a href="https://kafka.apache.org/" target="_blank" class="text-reset">kafka.apache.org</a>
+              </p>
+              <p>
+                <a href="https://www.confluent.io/" target="_blank" class="text-reset">Confluent.io</a>
+              </p>
+              <p>
+                <a href="https://ksqldb.io/" target="_blank" class="text-reset">KsqlDB.io</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4 color">Navigating to</h6>
+              <p>
+                <a href="/apache-kafka.html" class="text-reset">Apache Kafka</a>
+              </p>
+              <p>
+                <a href="/kafka-streams.html" class="text-reset"
+                  >Kafka Streams</a
+                >
+              </p>
+              <p>
+                <a href="/ksql-db.html" class="text-reset">KsqlDB</a>
+              </p>
+              <p>
+                <a href="/kafka-connect.html" class="text-reset"
+                  >Kafka Connect</a
+                >
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4 color">Contact</h6>
+              <p><i class="fas fa-home me-3"></i> Odisha, BAN, India</p>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+
+      <!-- Copyright -->
+      <div
+        class="text-center p-4"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        Copyright &copy; 2022 | <span class="color">Rajesh Bhola</span> :
+        <a class="text-reset fw-bold" href="https://codekafi.com/"
+          >CodeKafi.com</a
+        >
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <!--Footer end-->
+  </body>
+</html>

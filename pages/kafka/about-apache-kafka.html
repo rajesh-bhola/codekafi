@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Codekafi | Apache Kafka</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+      <div class="container-fluid">
+        <img src="../logo2.png" /> &nbsp;&nbsp;
+        <a class="navbar-brand" href="/index.html">CodeKafi</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mynavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="mynavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/apache-kafka.html"
+                >Apache Kafka</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/kafka-streams.html">Kafka Streams</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ksql-db.html">Ksql DB</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/kafka-connect.html">Kafka Connect</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br /><br />
+    <br />
+
+    <div class="container-fluid banner">
+      <h1
+        class="banner-text"
+        style="
+          font-size: 50px;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          color: white;
+        "
+      >
+        Apache Kafka with Advantages & Disadvantages
+      </h1>
+    </div>
+
+    <div class="container-fluid profile">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+          <div class="float-start">
+            <img
+              src="/pages/images/profile-pic1.png"
+              width="100"
+              height="90"
+              alt=""
+            />
+            <p
+              class=""
+              style="font-family: Verdana, Geneva, Tahoma, sans-serif"
+            >
+            <b>Rajesh Bhola</b>
+              <br />
+              <i>Jr. Software Engineer at <b>Girmiti</b></i><br>
+              <span class="text-muted title1">Exp: 2.5+ years</span>
+            </p>
+          </div>
+          <div class="float-end">
+            <p class="text-muted"><b>Published on : </b><i>14-July-2021</i></p>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+
+    <div class="container-fluid content justify-content-center">
+      <div class="row text-margin">
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+          <h1 class="color">What is Apache Kafka</h1>
+          <br />
+          <p class="text-size list-group-item-light text-line">Apache kafka is a distributed <b>publish-subscribe</b>
+            messaging system and a roubust queue that can handle a high volume of data and enables you 
+            to pass messages from one end-point to another.</p>
+          <p class="text-size list-group-item-light text-line">Kafka is suitable for both online and offline message 
+              consumption.
+          </p>
+          <p class="text-size list-group-item-light text-line">Kafka, which exchanging of data between applications,
+              servers and processors as well.
+          </p>
+          <br /><br />
+          <p class="text-size list-group-item-light text-line">
+            Originally developed by LinkedIn and donated to Apache Software Foundation. Currently it is 
+            maintained by Confluent.
+          </p>
+          <p class="text-size list-group-item-light text-line">Kafka messages are persisted on the disk
+              and replicated within the cluster to prevent data loss.
+          </p>
+          <p class="text-size list-group-item-light text-line">Kafka is built on top of zookeeper service.
+              It integrates very well with Apache Storm and Spark for real-time streaming data analysis.
+          </p>
+          <br /><br /> 
+          <h1 class="color">Why Apache Kafka</h1>
+          <br />   
+          <p class="text-size list-group-item-light text-line">It capables of handling millions of data
+              or messages per second.
+          </p>
+          <p class="text-size list-group-item-light text-line">It works as a mediator between source system
+              and target system. Thus, source system(<b>Producer</b>) data is sent to Apache Kafka, 
+              where it decouples the data and the target system(<b>Consumer</b>) consumes the data
+              from Kafka.</p>
+          <p class="text-size list-group-item-light text-line">The offsets for a partition are infinite.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            It is having extremely high performance i.e it has low latency value less than 10ms.(message delivery)
+          </p>
+          <p class="text-size list-group-item-light text-line">
+              Organizations such as LinkedIn, NetFlix, Twitter, Uber, Walmart, Oracle, Mozilla and over 
+              thousands of IT firms uses Apache Kafka.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+              It give guarantee for fault tolerance in the presence of machine failures.
+          </p>
+          <p class="text-size"><b>Examples:</b></p>
+          <p class="text-size alert alert-success">
+            Consumer successfully consumes the message that was delivered by the producer.
+            But, the consumer fails to process the message back due to backend database failure or
+            due to presence of a bug in the consumer code. In such situation consumer is unable to 
+            consume the message again. Apache kafka has resolved the problem by reprocessing the data.
+          </p><br><br>
+          <img
+          src="/images/kafka-architecture.png"
+          class="img-fluid"
+          width="800"
+          height="400"
+          alt=""
+        /> <br><br>
+          <p class="text-size list-group-item-light text-line">
+             It has the ability to handle a large number of diverse consumers.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+              Kafka is very fast and performs 2 million writes per sec.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+              Kafka persists all data to the disk, which essentially means that all the writes go to the 
+              page cache of the OS(RAM). This makes it very efficient to transfer data from page cache
+              to a network socket.
+          </p><br><br>
+          <h1 class="color">Benefits</h1>
+          <br /> 
+          <p class="text-size list-group-item-light text-line">
+              <b>Reliability - </b> Kafka is distributed, partitioned, replicated and fault tolerance.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+              <b>Scalability - </b> Kafka messaging system scales easily without downtime.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+              <b>Durability  - </b> Kafka uses "distributed commit log" which means messages
+              persists on disk as fast as possible, hence it is durable.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+              <b>Performance - </b> It maintains stable performance many terra bytes of messages
+              are stored.(high throughput & low latency)
+          </p>
+          <br /><br />
+          <h1 class="color">Use Cases</h1>
+          <br /> 
+          <p class="text-size list-group-item-light text-line">
+            <b>Messaging Broker  - </b> Used for to decouple processing from data producers.<br>
+            <b># </b> better throughput, built-in partitioning, replication and fault tolerance.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Website activity tracking  - </b> site activity like pageview, searches, clicks, other 
+            actions user may take etc.<br>
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Metrics - </b> Used for operational monitoring data, this involves aggregating statistics
+            from distributed applications.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Log Aggregation - </b> Collects physical log files of server and puts them in a central place for 
+            processing. This allows lower-latency processing.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Stream Processing - </b> Read data from a topic, process it, write that processed data
+            over a new topic. This new topic containing the processed data available to users and apllications.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Event Sourcing - </b> Handling large amounts of logs data make it an excellent backend
+            for building an application.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Commit Logs - </b> Helps replicate data between nodes and act as a re-syncing mechanism
+            failed nodes to restore their data.
+          </p><br><br>
+          <h1 class="color">Advantages</h1>
+          <br />
+          <p class="text-size list-group-item-light text-line">
+            <b>Low Latency - </b> because it decouples the message upto 10ms.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>High Throughput - </b> handles high volume and high velocity.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Durability - </b> replication feature, which makes data to persist more on the cluster
+            over a disk.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Easily Accessible - </b> data get stored in kafka. It becomes easily accessible to anyone.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Distributed System - </b> contains distributed architecture which makes it scalable(partitioning & replication).
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Real-time Handling - </b>handles real-time data pipelines.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Low latency - </b> because it decouples the message upto 10ms.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Batch Processing - </b> processing the messages in a bacth.
+          </p><br><br>
+          <h1 class="color">Disadvantages</h1>
+          <br />
+          <p class="text-size list-group-item-light text-line">
+            <b>Message Tweaking Issues - </b> it works well if the message does not need to change.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Reduces Performance - </b> brokers and consumers reduces performance by compressing
+            and decompressing the data flow.
+          </p>
+          <p class="text-size list-group-item-light text-line">
+            <b>Clumpsy Behaviour - </b>bit clumpsy when the number of queues increases in the clustger.
+          </p><br><br>
+          <p class="alert alert-secondary text-size" style="text-align:center">
+            <b>Thanks for reading !!!❤️</b>
+          </p> <br> <br>
+        </div>
+        <div class="col-md-3">
+          <h3><b>Related Posts</b></h3>
+          <br />
+          <ul class="list-unstyled">
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/messaging-system-and-type.html">1. What is messaging systems</a>
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/about-apache-kafka.html"
+                    >2. What is Apache Kafka and it's advantages &
+                    disadvantages</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/topic-partition.html"
+                    >3. What is Topics and Partitions</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/cluster-broker.html"
+                    >4. What is Cluster and Brokers</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/topic-replication.html"
+                    >5. Discussed about Topic Replication</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/producer.html">6. What is Producer</a>
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/consumer-consumer-groups.html"
+                    >7. What is Consumer and Consumer groups</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/role-of-zookeeper.html"
+                    >8. What is the role of Zookeeper</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/install-kafka-on-windows.html"
+                    >9. How to install kafka on windows</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/install-confluent-platform-kafka-docker.html"
+                    >10. How to install confluent platform kafka on windows using docker</a
+                  >
+                </h6>
+              </div>
+            </li>
+            <br />
+            <li class="media">
+              <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                  <a class="related-post" href="/pages/kafka/create-topic-produce-consume-messages.html"
+                    >11. How to create topic, produce and consume messages</a
+                  >
+                </h6>
+              </div>
+            </li>
+          </ul><br><br><br>
+
+          <h3><b>About Me</b></h3>
+          <div class="float-start bg-light aboutme">
+            <img
+              src="/pages/images/profile-pic1.png"
+              width="100"
+              height="90"
+              alt=""
+            />
+            <p
+              class="color"
+              style="font-family: Verdana, Geneva, Tahoma, sans-serif"
+            >
+              <b>Rajesh Bhola</b>
+              <br />
+              <p>
+                <i>I am a Junior Software Engineer at Girmiti, 
+                  and CodeKafi web services. I like writing about myself in the third person ✍️, 
+                  eating good breakfasts 🍔, and playing cricket 🏏.</i>
+              </p>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!--Footer start-->
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+      <section class="mb-4 text-center">
+        <!-- Facebook -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+
+        <!-- Twitter -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-twitter"></i
+        ></a>
+
+        <!-- Instagram -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-instagram"></i
+        ></a>
+
+        <!-- Linkedin -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <!-- Github -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 navbar-light">
+              <!-- Content -->
+              <h6 class="">
+                <img src="../logo2.png" />
+                <a class="navbar-brand" href="index.html">CodeKafi</a>
+              </h6>
+              <p>
+                This website is providing the knowledge regarding Apache Kafka concepts.
+                And also provides the knowledge about Kafka Streams and KsqlDB.
+               </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4 color">Reference</h6>
+              <p>
+                <a href="https://kafka.apache.org/" target="_blank" class="text-reset">kafka.apache.org</a>
+              </p>
+              <p>
+                <a href="https://www.confluent.io/" target="_blank" class="text-reset">Confluent.io</a>
+              </p>
+              <p>
+                <a href="https://ksqldb.io/" target="_blank" class="text-reset">KsqlDB.io</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4 color">Navigating to</h6>
+              <p>
+                <a href="/apache-kafka.html" class="text-reset">Apache Kafka</a>
+              </p>
+              <p>
+                <a href="/kafka-streams.html" class="text-reset"
+                  >Kafka Streams</a
+                >
+              </p>
+              <p>
+                <a href="/ksql-db.html" class="text-reset">KsqlDB</a>
+              </p>
+              <p>
+                <a href="/kafka-connect.html" class="text-reset"
+                  >Kafka Connect</a
+                >
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4 color">Contact</h6>
+              <p><i class="fas fa-home me-3"></i> Odisha, BAN, India</p>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+
+      <!-- Copyright -->
+      <div
+        class="text-center p-4"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        Copyright &copy; 2022 | <span class="color">Rajesh Bhola</span> :
+        <a class="text-reset fw-bold" href="https://codekafi.com/"
+          >CodeKafi.com</a
+        >
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <!--Footer end-->
+  </body>
+</html>
